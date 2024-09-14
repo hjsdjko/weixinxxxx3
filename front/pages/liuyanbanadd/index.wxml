@@ -1,0 +1,13 @@
+<view class="container">
+<view class="login-from">
+  <view class="inputView">
+    <label class="loginLab">内容</label>
+    <textarea type="text" placeholder="请输入内容" bindinput="neirongInput">
+    </textarea>
+  </view> 
+  <view class="line"></view>
+  <view class="loginBtnView">
+    <button class="loginBtn" type="primary" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="login">留言</button>
+  </view>
+</view>
+</view>

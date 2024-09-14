@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.LiuyanbanInfoDao">
+
+    <select id="checkRepeat" resultType="java.lang.Integer">
+        select count(id) from `liuyanban_info` where ${column} = #{value}
+        <if test="id != null">
+            and id != #{id}
+        </if>
+    </select>
+
+  <!--  <select id="findByYonghuming" resultType="com.example.vo.LiuyanbanInfoVo">
+        select * from `liuyanban_info` where `yonghuming` = #{username}
+    </select>-->
+
+    <select id="findByBiaoti" resultType="com.example.vo.LiuyanbanInfoVo">
+        select `liuyanban_info`.* from `liuyanban_info`
+        where 1 = 1
+        <if test="biaoti != null and biaoti != '' and biaoti != 'all'">
+            and `liuyanban_info`.`biaoti` like concat('%', #{biaoti}, '%')
+        </if>
+        order by `liuyanban_info`.id desc
+    </select>
+	<select id="findByBiaotilist2" resultType="com.example.vo.LiuyanbanInfoVo">
+        select `liuyanban_info`.* from `liuyanban_info`
+        where 1 = 1
+        <if test="biaoti != null and biaoti != '' and biaoti != 'all'">
+            and `liuyanban_info`.`biaoti` like concat('%', #{biaoti}, '%')
+        </if>
+		<if test="yonghuming != null and yonghuming != '' and yonghuming != 'all'">
+            and `liuyanban_info`.`yonghuming` like concat('%', #{yonghuming}, '%')
+        </if>
+        order by `liuyanban_info`.id desc
+    </select>
+        <!--list23N-->
+    <select id="count" resultType="Integer">
+        select count(id) from `liuyanban_info`
+    </select>
+</mapper>
+

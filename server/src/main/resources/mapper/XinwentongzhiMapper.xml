@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.XinwentongzhiInfoDao">
+
+    <select id="checkRepeat" resultType="java.lang.Integer">
+        select count(id) from `xinwentongzhi_info` where ${column} = #{value}
+        <if test="id != null">
+            and id != #{id}
+        </if>
+    </select>
+
+  <!--  <select id="findByFaburen" resultType="com.example.vo.XinwentongzhiInfoVo">
+        select * from `xinwentongzhi_info` where `faburen` = #{username}
+    </select>-->
+
+    <select id="findByBiaoti" resultType="com.example.vo.XinwentongzhiInfoVo">
+        select `xinwentongzhi_info`.* from `xinwentongzhi_info`
+        where 1 = 1
+        <if test="biaoti != null and biaoti != '' and biaoti != 'all'">
+            and `xinwentongzhi_info`.`biaoti` like concat('%', #{biaoti}, '%')
+        </if>
+        order by `xinwentongzhi_info`.id
+    </select>
+    <select id="findByBiaotilb" resultType="com.example.vo.XinwentongzhiInfoVo">
+        select `xinwentongzhi_info`.* from `xinwentongzhi_info`
+        where 1 = 1
+        <if test="biaoti != null and biaoti != '' and biaoti != 'all'">
+            and `xinwentongzhi_info`.`biaoti` like concat('%', #{biaoti}, '%')
+        </if>
+        <if test="leibie != null and leibie != '' and leibie != 'all'">
+            and `xinwentongzhi_info`.`leibie` like concat('%', #{leibie}, '%')
+        </if>
+        order by `xinwentongzhi_info`.id
+    </select>
+	<select id="findByBiaotilist2" resultType="com.example.vo.XinwentongzhiInfoVo">
+        select `xinwentongzhi_info`.* from `xinwentongzhi_info`
+        where 1 = 1
+        <if test="biaoti != null and biaoti != '' and biaoti != 'all'">
+            and `xinwentongzhi_info`.`biaoti` like concat('%', #{biaoti}, '%')
+        </if>
+		<if test="faburen != null and faburen != '' and faburen != 'all'">
+            and `xinwentongzhi_info`.`faburen` like concat('%', #{faburen}, '%')
+        </if>
+        order by `xinwentongzhi_info`.id
+    </select>
+        <!--list23N-->
+    <select id="count" resultType="Integer">
+        select count(id) from `xinwentongzhi_info`
+    </select>
+</mapper>
+

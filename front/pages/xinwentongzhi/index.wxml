@@ -1,0 +1,19 @@
+<view class="nx_detail">
+  <view class="nx_detail_main">
+    <view class="nx_detail_main_item">
+      <view class="nx_detail_main_item_left">公告标题</view>
+      <view class="nx_detail_main_item_right">{{obj.biaoti}}</view>
+    </view>
+  </view>
+  <view >发布时间：{{obj.addtime}} 点击率：{{obj.dianjilv}} </view>
+  <view class="line" ></view>
+  <view style="height:20px;"></view>
+  <rich-text  nodes="{{obj.neirong}}"  ></rich-text>
+  <view class="loginBtnView">
+   
+
+   <button class="weui-btn" style="float:left" type="primary" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="dianzan_d" >支持 <image  src="/imgs/ding.gif" style="width:20px;height:20px; "></image>{{obj.dianzan_d}}</button>
+   <button class="weui-btn"  type="primary" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="dianzan_c" >反对 <image  src="/imgs/cai.gif" style="width:20px;height:20px; "></image> {{obj.dianzan_c}}</button>
+
+ </view>
+</view>

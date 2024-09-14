@@ -1,0 +1,13 @@
+<view class="nx_detail">
+  <view class="nx_detail_main">
+    <view class="nx_detail_main_item">
+      <view class="nx_detail_main_item_left">通知标题</view>
+      <view class="nx_detail_main_item_right">{{obj.tongzhibiaoti}}</view>
+    </view>
+    <view class="nx_detail_main_item">
+      <view class="nx_detail_main_item_left">通知类型</view>
+      <view class="nx_detail_main_item_right">{{obj.tongzhileixing}}</view>
+    </view>
+  </view>
+  <rich-text nodes="{{obj.tongzhineirong}}" ></rich-text>
+</view>

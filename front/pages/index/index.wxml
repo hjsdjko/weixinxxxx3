@@ -1,0 +1,36 @@
+<!--index.wxml-->
+<view class="index">
+<!-- 轮播图开始 -->
+<view class="nx_swiper">
+    <swiper autoplay indicator-dots circular interval="2000">
+        <swiper-item>
+                <image src="../../imgs/2.jpg"></image>
+        </swiper-item>
+        <swiper-item>
+                <image src="../../imgs/1.jpg"></image>
+        </swiper-item>
+    </swiper>
+</view>
+<!-- 轮播图结束 -->
+<view class="nx_line">
+    <view class="nx_line_title">公告信息</view>
+    <view class="nx_line_list">
+        <navigator class="nx_line_item" wx:for="{{gonggaoList}}" wx:for-item="item" wx:key="id" url="/pages/gonggao/index?id={{item.id}}">
+            <view style="flex:1；">
+                <view class="nx_item_name">{{item.gonggaobiaoti}}</view>
+            </view>
+        </navigator>
+    </view>
+</view>
+<view class="nx_line">
+    <view class="nx_line_title">扶贫政策</view>
+    <view class="nx_line_list">
+        <navigator class="nx_line_item" wx:for="{{tongzhiList}}" wx:for-item="item" wx:key="id" url="/pages/tongzhi/index?id={{item.id}}">
+            <view style="display:flex;flex:1; padding: 0 30rpx; position: relative">
+                <view class="nx_item_name" style="width:75%">{{item.tongzhibiaoti}}</view>
+                <view style="width:25%;text-align:right;font-size:10px">{{item.tongzhileixing}}</view>
+            </view>
+        </navigator>
+    </view>
+</view>
+</view>

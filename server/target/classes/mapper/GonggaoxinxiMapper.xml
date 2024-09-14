@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.GonggaoxinxiInfoDao">
+
+    <select id="checkRepeat" resultType="java.lang.Integer">
+        select count(id) from `gonggaoxinxi_info` where ${column} = #{value}
+        <if test="id != null">
+            and id != #{id}
+        </if>
+    </select>
+
+  <select id="findByGonggaobiaotizj" resultType="com.example.vo.GonggaoxinxiInfoVo">
+        select * from `gonggaoxinxi_info` where `gonggaobiaoti` = #{username}
+    </select>
+
+    <select id="findByGonggaobiaoti" resultType="com.example.vo.GonggaoxinxiInfoVo">
+        select `gonggaoxinxi_info`.* from `gonggaoxinxi_info`
+        where 1 = 1
+        <if test="gonggaobiaoti != null and gonggaobiaoti != '' and gonggaobiaoti != 'all'">
+            and `gonggaoxinxi_info`.`gonggaobiaoti` like concat('%', #{gonggaobiaoti}, '%')
+        </if>
+        order by `gonggaoxinxi_info`.id
+    </select>
+	<!--list23N-->
+    <select id="count" resultType="Integer">
+        select count(id) from `gonggaoxinxi_info`
+    </select>
+</mapper>
+

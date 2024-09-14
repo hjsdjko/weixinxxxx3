@@ -1,0 +1,8 @@
+<view class="nx_detail">
+  <view class="nx_detail_main">
+  	<view class="nx_detail_main_item">    <view class="nx_detail_main_item_left">类别</view>    <view class="nx_detail_main_item_right">{{obj.leibie}}</view>    </view>    
+	
+  </view>
+  <!--jixaaxnnxiu-->
+  <!--dxaizhxifu-->
+</view>

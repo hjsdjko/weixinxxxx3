@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>农产品扶贫助农系统</title>
+    <link href="../images/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body onLoad="sendRequest()" >
+<div id="app">
+    <div class="videozz"></div>
+    <div class="box">
+        <div class="box-a">
+            <div class="m-2">
+                <div class="m-2-1">
+                    <form name="form1" id="form1" >
+                        <div class="m-2-2">
+                            <input type="text" placeholder="请输入账号" id="username" name="username" v-model="user.username" />
+                        </div>
+                        <div class="m-2-2">
+                            <input type="password" placeholder="请输入密码" id="pwd" name="pwd" v-model="user.mima" />
+                        </div>
+                        <div class="m-2-2">
+                            <select name="cx" id="cx" style="height:36px; width:303px;" v-model="user.level">
+
+                                <option value="管理员" name="level">管理员</option>
+
+                            </select>
+                        </div>
+                        <div class="m-2-2-1" >
+                            <input type="text" placeholder="请输入验证码" style="width:215px;" name="yzm" id="yzm"  />
+                            <input type = "text" class="form-control span12" style="width: 70px;height:34px; text-align: center" id="code" /> </div>
+                        <div class="m-2-2">
+                            <button type="button" value="登录"  @click="login" /> 登录</div>
+                    </form>
+                </div>
+            </div>
+            <div class="m-5">
+                <div id="m-5-id-1">
+                    <div id="m-5-2">
+                        <div id="m-5-id-2">    </div>
+                        <div id="m-5-id-3"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="m-10"></div>
+            <div class="m-xz7"></div>
+            <div class="m-xz8 xzleft"></div>
+            <div class="m-xz9"></div>
+            <div class="m-xz9-1"></div>
+            <div class="m-x17 xzleft"></div>
+            <div class="m-x18"></div>
+            <div class="m-x19 xzleft"></div>
+            <div class="m-x20"></div>
+            <div class="m-8"></div>
+            <div class="m-9"><div class="masked1" id="sx8">农产品扶贫助农系统</div></div>
+            <div class="m-11">
+                <div class="m-k-1"><div class="t1"></div></div>
+                <div class="m-k-2"><div class="t2"></div></div>
+                <div class="m-k-3"><div class="t3"></div></div>
+                <div class="m-k-4"><div class="t4"></div></div>
+                <div class="m-k-5"><div class="t5"></div></div>
+                <div class="m-k-6"><div class="t6"></div></div>
+                <div class="m-k-7"><div class="t7"></div></div>
+            </div>
+            <div class="m-14"><div class="ss"></div></div>
+            <div class="m-15-a">
+                <div class="m-15-k">
+                    <div class="m-15xz1">
+                        <div class="m-15-dd2"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="m-16"></div>
+            <div class="m-17"></div>
+            <div class="m-18 xzleft"></div>
+            <div class="m-19"></div>
+            <div class="m-20 xzleft"></div>
+            <div class="m-21"></div>
+            <div class="m-22"></div>
+            <div class="m-23 xzleft"></div>
+            <div class="m-24" id="localtime"></div>
+        </div>
+    </div>
+</div>
+<script src="../js/hsgyanzhengma.js"></script>
+<script src="../js/vue2.6.11/vue.min.js"></script>
+<script src="../js/vue2.6.11/axios.js"></script>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            user: {
+                username: "",
+                mima: "",
+                level: null
+            },
+            authorities: [],
+        },
+        created: function () {
+            axios.get("/getAuthority").then(res => {
+                if (res.data.code === '0') {
+                    this.authorities = res.data.data;
+                } else {
+                    alert(res.data.msg);
+                }
+            });
+        },
+        methods: {
+            login() {
+                if (!this.user.username) {
+                    alert("请输入用户名");
+                    return;
+                }
+                if (!this.user.mima) {
+                    alert("请输入密码");
+                    return;
+                }
+                if (!this.user.level) {
+                    alert("请选择角色");
+                    return;
+                }
+                var inputCode = yzm.value.toUpperCase(); //取得输入的验证码并转化为大写??
+                if(inputCode.length==0) { //若输入的验证码长度为0
+                    alert("请输入验证码 "); //则弹出请输入验证码
+                    return;
+                }
+                else if(inputCode!=codes.toUpperCase()) { //若输入的验证码与产生的验证码不一致时
+                    alert("验证码输入错误 请重新输入"); //则弹出验证码输入错误
+                    change();//刷新验证码
+                    input.value="";//清空文本框
+                    return;
+                }
+                axios.post('/login', this.user).then(res => {
+                    if(res.data.code === '0') {
+                        localStorage.setItem('user', JSON.stringify(res.data.data));
+
+                        if (this.user.level==="管理员"){window.location = '/end/page/main_guanliyuan.html';}
+
+
+                    } else {
+                        alert(res.data.msg);
+                    }
+                });
+            },
+        }
+    });
+</script>
+</body>
+</html>

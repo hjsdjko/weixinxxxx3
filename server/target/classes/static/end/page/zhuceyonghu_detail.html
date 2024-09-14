@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml"
+	  xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT"/>
+	<title>注册用户详细</title>
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/nav.css">
+	<link rel="stylesheet" href="../css/font-awesome.css">
+	<link rel="stylesheet" href="../css/element/index.css">
+	<link rel="stylesheet" href="../css/hsg.css">
+</head>
+<body>
+<div id="wrapper" v-cloak>
+	<div >
+		<div style="padding: 0 20px">
+			<div>
+				<div style="color: #666; font-weight: bold; border-bottom: 1px solid #ccc; padding: 10px 0; margin-bottom: 20px; font-size: 30px;">注册用户详细</div>
+			</div>
+			<div style="margin-top: 10px">
+				<div style="border: 1px solid #ff6b31;">
+					<div style="padding: 5px; border-bottom: 1px solid #ff6b31; color: white; background-color: #ff6b31;">注册用户详细</div>
+					<div style="border: 1px solid #ccc; padding: 10px">
+						<div class="table-responsive">
+
+
+							<table width="98%" border="0"  align="center" cellpadding="3" cellspacing="1" class="table table-striped table-bordered table-hover">
+								<tr>
+									<td width='11%' height=44>账号：</td><td width='39%'>{{zhuceyonghuInfo.zhanghao}}</td><td  rowspan=6 align=center><a v-for="id in zhaopian" target=_blank><img @mouseover="mouseOver(id)" :src="'/files/download/' + id" width=228 height=215 border=0></a></td></tr><tr><td width='11%' height=44>密码：</td><td width='39%'>{{zhuceyonghuInfo.mima}}</td></tr><tr><td width='11%' height=44>姓名：</td><td width='39%'>{{zhuceyonghuInfo.xingming}}</td></tr><tr><td width='11%' height=44>性别：</td><td width='39%'>{{zhuceyonghuInfo.xingbie}}</td></tr><tr><td width='11%' height=44>手机：</td><td width='39%'>{{zhuceyonghuInfo.shouji}}</td></tr><tr><td width='11%' height=44>身份证：</td><td width='39%'>{{zhuceyonghuInfo.shenfenzheng}}</td></tr><tr><td width='11%' height=100  >备注：</td><td width='39%' colspan=2 height=100 >{{zhuceyonghuInfo.beizhu}}</td></tr><tr><td colspan=3 align=center><input type=button name=Submit5 value=返回 onClick="javascript:history.back()"  class="btn btn-primary" />&nbsp;<input type=button name=Submit52 value=打印 onClick="javascript:window.print()"  class="btn btn-primary" /></td></tr>
+							</table>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/nav.js"></script>
+<script src="../js/my.js"></script>
+<script src="../js/vue2.6.11/vue.min.js"></script>
+<script src="../js/vue2.6.11/axios.js"></script>
+<script src="../js/element/index.js"></script>
+
+
+<script>
+	new Vue({
+		el: '#wrapper',
+		data: {
+			isCollect: false,
+			zhuceyonghuid: 0,
+			zhaopian: [],
+			zhuceyonghuInfo: {},
+			user: {},
+
+		},
+
+		created: function () {
+
+			this.zhuceyonghuid = this.getQueryVariable('zhuceyonghuid');
+			this.loadShangpinxinxiInfo();
+		},
+
+		methods: {
+
+			loadShangpinxinxiInfo() {
+				axios.get("/zhuceyonghuInfo/" + this.zhuceyonghuid).then(res => {
+					if (res.data.code === '0') {
+						this.zhuceyonghuInfo = res.data.data;
+						if (this.zhuceyonghuInfo.zhaopian) {
+							let zhaopian = JSON.parse(this.zhuceyonghuInfo.zhaopian);
+						
+							if (zhaopian.length > 4) {
+								zhaopian = zhaopian.splice(0, 4);
+							}
+							this.zhaopian = zhaopian;
+							if (zhaopian.length) {
+								this.mainSrc = '/files/download/' + zhaopian[0];
+							}
+						}
+					} else {
+						alert(res.data.msg);
+					}
+				});
+			},
+			getQueryVariable(variable) {
+				let query = window.location.search.substring(1);
+				let vars = query.split("&");
+				for (let i = 0; i < vars.length; i++) {
+					let pair = vars[i].split("=");
+					if (pair[0] === variable) {
+						return pair[1];
+					}
+				}
+				return '';
+			},
+
+		}
+	})
+</script>
+</body>
+</html>

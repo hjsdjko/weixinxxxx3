@@ -1,0 +1,68 @@
+<view class="persional"  class="user_img_wrap">
+  <view class="persional-header" style="background:url('../../imgs/hsgbg.jpg')">
+    <view class="edit" >
+      
+
+
+
+    </view>
+    <view class="info">
+       <view class="vip" >
+        <text ></text>
+        <text></text>
+      </view>
+      <view class="header-img">
+        <image src="{{userinfo.avater}}"></image>
+      </view>
+      <view class="send">
+        <!-- <text >签到送积分</text> -->
+      </view>
+    </view>
+    <view class="name" wx:if="{{userinfo.level}}">
+      <view class="username">
+        <text>{{userinfo.userName}}</text>
+        <text>[{{userinfo.level}}]</text>
+        <text bindtap="exitAccount">退出</text>
+      </view>
+      <text class="tel"></text>
+    </view>
+  </view>
+  <view class="persional-body" >
+          <view class="bottom" wx:if="{{userinfo.level && userinfo.userId}}">
+		  	
+			<view class="my-hsg1 box" wx:if="{{userinfo.level == '注册用户'}}" bindtap="zhuceyonghuupdt2"><view><text></text></view><text >编辑个人资料</text><text></text></view>
+    <view class="my-hsg1 box" wx:if="{{userinfo.level == '注册用户'}}" bindtap="goumaiList2"><view><text></text></view><text >订单信息</text><text></text></view>
+    <view class="my-hsg1 box" wx:if="{{userinfo.level == '注册用户'}}" bindtap="zhifu"><view><text></text></view><text >支付密码</text><text></text></view>
+    <view class="my-hsg1 box" wx:if="{{userinfo.level == '注册用户'}}" bindtap="ncppl"><view><text></text></view><text >评论查询</text><text></text></view>
+    
+    <view class="my-hsg1 box" wx:if="{{userinfo.level == '注册用户'}}" bindtap="pkzr"><view><text></text></view><text >贫困申请认证</text><text></text></view>
+
+
+
+
+            
+          </view>
+  </view>
+</view>
+<view class="form-wrap" wx:if="{{userinfo.level && userinfo.userId}}"></view>
+<view class="form-wrap"  wx:else>
+  <form bindsubmit="formSubmit" bindreset="formReset">
+      <view class="section" style="margin-top:20px">
+        <input name="name" placeholder="请输入真实姓名" bindinput="nameInput" />
+      </view>
+      <view class="section">
+        <input name="code" placeholder="请输入账号" bindinput="codeInput" />
+      </view>
+      <view class="section">
+        <picker class="pick-bg" bindchange="bindPickerChange" value="{{sex}}" range="{{array}}">
+          <view class="picker">
+           权限：{{leixing}}
+          </view>
+        </picker>
+      </view>
+      <view class="btn-area">
+        <button formType="submit">绑定</button>
+        <text class="bind-tip"><text style="color:red">友情提示</text>：请先绑定用户 </text>
+      </view>
+    </form>
+</view>

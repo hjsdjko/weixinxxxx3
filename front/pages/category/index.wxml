@@ -1,0 +1,37 @@
+<view class="wrap">
+			
+					<view class="nx_line_title">
+	  <span>农产品信息</span>
+    <view class="nx_congar">
+     <input class="input" confirm-type="search" bindfocus="bindfocus" placeholder="请输入农产品名称"/>
+    </view>
+  </view> 
+  
+
+  
+   
+</view>
+<view class="container container-row" wx:if="{{show1}}">
+  <scroll-view class="container-column container-left" scroll-y="true" enable-flex="true">
+    <block   wx:for="{{leftMenuList}}" wx:key="*this">
+      <view  class="goodsType {{item.id===currentIndex?'goodsTypeSelected':''}}"
+      bindtap="handleItemTap" data-id="{{item.id}}"  data-type="{{item.leibie}}">
+        <text>{{item.leibie}}</text>
+      </view>
+    </block>  
+  </scroll-view>
+  <scroll-view class="container-column container-right" scroll-y="true" enable-flex="true">
+    <block   wx:for="{{rightContent}}"  wx:key="id">
+      <navigator class="book container-column"  url="/pages/shangpinxinxidetail/index?id={{item.id}}">
+        <text class="name">{{item.shangpinmingcheng}}</text>
+        <view class="container-row imginfo">
+          <image class="coverImg" src="{{item.url}}" mode="aspectFill"></image>
+        </view>
+       
+        
+        
+    </navigator>
+    </block>
+  </scroll-view>
+</view>
+

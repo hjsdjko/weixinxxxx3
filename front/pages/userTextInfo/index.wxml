@@ -1,0 +1,55 @@
+<view class="nx_detail">
+  <!-- 轮播图开始 -->
+  <view class="nx_swiper">
+    <swiper autoplay indicator-dots circular>
+      <swiper-item wx:for="{{swiperList}}" wx:key="item">
+        <navigator>
+          <image src="{{item.imgSrc}}"></image>
+        </navigator>
+      </swiper-item>
+    </swiper>
+  </view>
+  <!-- 轮播图结束 -->
+  <view class="nx_detail_main">
+    <view class="nx_detail_main_item">
+      <view class="nx_detail_main_item_left">标题</view>
+      <view class="nx_detail_main_item_right">{{obj.title}}</view>
+    </view>
+    <view class="nx_detail_main_item">
+      <view class="nx_detail_main_item_left">描述</view>
+      <view class="nx_detail_main_item_right" style="word-break: break-all;">{{obj.description}}</view>
+    </view>
+  </view>
+  <rich-text nodes="{{obj.content}}" ></rich-text>
+</view>
+<view class="saySthView">
+<input name="commentContent" class="saySth" placeholder="说点什么" confirm-type="send" bindconfirm="saveComment" focus='{{commentFocus}}' value='{{contentValue}}'
+data-replyFatherCommentId='{{replyFatherCommentId}}'
+data-replyToUserId='{{replyToUserId}}'
+/>
+</view>
+
+<block wx:for="{{commentsList}}">
+  <view class='comments-all' bindtap='replyFocus'
+  data-fatherCommentId='{{item.id}}'
+  data-toUserId='{{item.fromUserId}}'
+  data-toNickname='{{item.nickname}}'
+  >
+      <view class='container-comments'>
+          <view class='nickname-comments' style="display: flex;align-items: center;">
+            <image src="{{item.avater}}" class="face"></image>
+              <label class='nickname-lbl'>{{item.userName}}</label>
+              于
+              <label class='date-lbl'>{{item.createTime}}</label>
+              <!-- 留言： -->
+              <block wx:if="{{item.toNickname != null}}">
+                回复
+                <label class='nickname-lbl'>@{{item.toNickname}}</label>
+              </block>
+              <block wx:else>
+                留言：{{item.content}}
+              </block>
+          </view>
+      </view>
+  </view>
+</block>

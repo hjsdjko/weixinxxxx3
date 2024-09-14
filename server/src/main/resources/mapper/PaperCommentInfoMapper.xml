@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.PaperCommentInfoDao">
+    <select id="findByContent" resultType="com.example.entity.PaperCommentInfo">
+        select a.*, b.name as paperName, c.xingming as userName, c.zhaopian as avater from paper_comment_info as a
+        left join paper_info as b on a.paperId = b.id
+        left join zhuceyonghu_info as c on a.userId = c.id
+        where 1 = 1
+        <if test="name != null and name != 'all' and name != ''">
+            and `content` like concat('%', #{name}, '%')
+        </if>
+    </select>
+</mapper>

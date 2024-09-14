@@ -1,0 +1,17 @@
+﻿<view class="container">
+	<view class="nx_line_title">
+	  <span>贫困认证申请</span>
+	  <span  style="float:right;color:red;font-weight: bold; " bindtap="hsgadd">+</span>
+	</view> 
+    <view class="item">
+        <navigator  wx:for="{{PinkunrenzhengshenqingList}}"  hover-class="weui-cell_active">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image class="weui-media-box__thumb" src="{{item.url}}" style="height:200rpx;width:200rpx;" bindtap="hsgdetail" data-id="{{item.id}}" />
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__title2" style="width:40px;font-size:14px; font-weight: 100; padding:inherit; padding-top: 5px; height:30px; text-align:center;float:left;">{{item.xingming}}</view>
+          
+		  </view>
+        </navigator>
+    </view>
+</view>

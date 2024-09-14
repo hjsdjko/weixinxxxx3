@@ -1,0 +1,12 @@
+<view class="container">
+<view class="login-from">
+	<view class="inputView">
+    <label class="loginLab">类别</label>
+    <input class="inputText" type="text" placeholder="请输入类别" bindinput="leibieInput" value=""  />
+  </view>		
+  <view class="line"></view>
+  <view class="loginBtnView">
+    <button class="loginBtn" type="primary" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="login">提交</button>
+  </view>
+</view>
+</view>

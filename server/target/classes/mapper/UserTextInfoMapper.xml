@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.UserTextInfoDao">
+
+    <select id="findByName" resultType="com.example.vo.UserTextInfoVo">
+        select `user_text_info`.* from `user_text_info`
+
+        where 1 = 1
+        <if test="name != null and name != '' and name != 'all'">
+            and `user_text_info`.`name` like concat('%', #{name}, '%')
+        </if>
+        order by `user_text_info`.id desc
+    </select>
+    <select id="findAllPageByUserId" resultType="com.example.vo.UserTextInfoVo">
+        select t.*,u.xingming as userName,u.zhaopian as avater from `user_text_info` t join zhuceyonghu_info u on t.userId = u.id
+        where 1 = 1
+        <if test="name != null and name != '' and name != 'all'">
+            and t.`name` like concat('%', #{name}, '%')
+        </if>
+        order by t.id desc
+    </select>
+
+
+</mapper>

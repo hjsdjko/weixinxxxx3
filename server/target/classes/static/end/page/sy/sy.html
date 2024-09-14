@@ -1,0 +1,121 @@
+<!DOCTYPE html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="format-detection" content="telephone=yes" />
+</head>
+<style>
+    *{padding: 0; margin: 0; font-family: "Lato", sans-serif}
+    i{font-size: 24px}
+    body{background: #bdf5ea; color: #b3451b}
+    div{font-size: 20px; text-align: center; padding-top: 15px;}
+    div span{display: inline-block; width: 50px; height: 50px;padding: 10px; border-radius: 5px}
+    p{font-size: 18px}
+    span.red{background: #ff0000}
+    span.yg{background: yellowgreen}
+    span.or{background: orange}
+    span.pi{background: palevioletred}
+    span.pk{background: #00a0e9}
+    span.mk{background: #1FADC5}
+    span p:first-child{font-size: 25px}
+    span p:last-child{font-size: 14px}
+</style>
+<body>
+<script type="text/javascript" src="images/timecountdown.js"></script>
+<script type="text/javascript">
+    window.onload=function(){
+        xcsoft.countdown('2023-6-1',function (time) {
+            document.getElementById("y1").innerHTML=time.year
+            document.getElementById("d1").innerHTML=time.day
+            document.getElementById("h1").innerHTML=time.hourZero
+            document.getElementById("i1").innerHTML=time.minuteZero
+            document.getElementById("s1").innerHTML=time.secondZero
+            document.getElementById("m1").innerHTML=time.msecZero
+        },function (time) {
+        })
+        xcsoft.countup('2020-11-11',function (time) {
+            document.getElementById("y2").innerHTML=time.year
+            document.getElementById("d2").innerHTML=time.day
+            document.getElementById("h2").innerHTML=time.hourZero
+            document.getElementById("i2").innerHTML=time.minuteZero
+            document.getElementById("s2").innerHTML=time.secondZero
+        })
+        var nes=parseInt(new Date().getTime()/1000)+60;
+        xcsoft.countdown(parseInt(nes)+'.3',function (time) {
+            document.getElementById("s3").innerHTML=time.secondZero
+            document.getElementById("m3").innerHTML=time.msecZero
+        })
+    }
+</script>
+<div>
+    <i>距离我们毕业还有</i>
+    <div>
+        <span class="red">
+            <p id="y1"></p>
+            <p>年</p>
+        </span>
+        <span class="yg">
+            <p id="d1"></p>
+            <p>天</p>
+        </span>
+        <span class="or">
+            <p id="h1"></p>
+            <p>时</p>
+        </span>
+        <span class="pi">
+            <p id="i1"></p>
+            <p>分</p>
+        </span>
+        <span class="pk">
+            <p id="s1"></p>
+            <p>秒</p>
+        </span>
+        <span class="mk">
+            <p id="m1"></p>
+            <p>毫秒</p>
+        </span>
+    </div>
+</div>
+<div>
+    <i>从2020年11月11日至今已经过去</i>
+    <div>
+        <span class="red">
+            <p id="y2"></p>
+            <p>年</p>
+        </span>
+        <span class="yg">
+            <p id="d2"></p>
+            <p>天</p>
+        </span>
+        <span class="or">
+            <p id="h2"></p>
+            <p>时</p>
+        </span>
+        <span class="pi">
+            <p id="i2"></p>
+            <p>分</p>
+        </span>
+        <span class="pk">
+            <p id="s2"></p>
+            <p>秒</p>
+        </span>
+    </div>
+</div>
+<div>
+    <i>60秒倒计时</i>
+    <div>
+        <span class="pk">
+            <p id="s3"></p>
+            <p>秒</p>
+        </span>
+        <span class="mk">
+            <p id="m3"></p>
+            <p>毫秒</p>
+        </span>
+    </div>
+</div>
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+  <p> &copy; <script>document.write(new Date().getFullYear());</script> Minimal. All Rights Reserved | Design by  </p>
+</div>
+</body>
+</html>

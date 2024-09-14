@@ -1,0 +1,109 @@
+{
+    "pages": [
+        "pages/user/index",
+        "pages/index/index",
+        "pages/xinwentongzhi/index",
+		"pages/liuyanbanadd/index",
+		"pages/liuyanbanlist/index",
+		"pages/login/index",
+		"pages/resetPass/index",
+		"pages/shoucangjilulist2/index",
+		"pages/Zhuceyonghuadd/index",
+        "pages/Zhuceyonghulist/index",
+        "pages/zhuceyonghudetail/index",
+        "pages/Zhuceyonghuupdt2/index",
+        "pages/Shangpinxinxiadd/index",
+        "pages/Shangpinxinxilist/index",
+        "pages/shangpinxinxidetail/index",
+        "pages/Shangpinleibieadd/index",
+        "pages/Shangpinleibielist/index",
+        "pages/shangpinleibiedetail/index",
+
+        "pages/cartInfo/index",
+        "pages/zhifu/index",
+        "pages/category/index",
+      
+        "pages/collect/index",
+
+        "pages/search/search",
+
+        "pages/tongzhi/index",
+        "pages/fabu/index",
+        "pages/gonggao/index",
+        "pages/myTextInfo/index",
+        "pages/luntan/index",
+        "pages/Goumailist2/index",
+
+        "pages/Nongchanpinpinglunadd/index",
+        "pages/nongchanpinpinglundetail/index",
+        "pages/Nongchanpinpinglunlist/index",
+        "pages/Nongchanpinpinglunlist2/index",
+        "pages/Pinkunrenzhengshenqingadd/index",
+        "pages/pinkunrenzhengshenqingdetail/index",
+        "pages/Pinkunrenzhengshenqinglist/index",
+        "pages/Pinkunrenzhengshenqinglist2/index",
+
+        "pages/userTextInfo/index",
+
+
+
+
+
+
+        "pages/userinfo/index"
+    ],
+    "permission": {
+        "scope.userLocation": {
+          "desc": "你的位置信息将用于小程序位置接口的效果展示"
+        }
+      },
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "农产品扶贫助农系统",
+        "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+        "color": "#999",
+        "selectedColor": "#1296DB",
+        "backgroundColor": "#fafafa",
+        "position": "bottom",
+        "borderStyle": "black",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "text": "首页",
+                "iconPath": "icons/home.png",
+                "selectedIconPath": "icons/_home.png"
+            },
+			{
+			    "pagePath": "pages/category/index",
+			    "text": "农产品",
+			    "iconPath": "icons/hsgcd1.png",
+			    "selectedIconPath": "icons/hsgcd1_active.png" 
+			},
+			{
+			    "pagePath": "pages/cartInfo/index",
+			    "text": "购物车",
+			    "iconPath": "icons/hsgcd2.png",
+			    "selectedIconPath": "icons/hsgcd2_active.png" 
+            },
+            {
+			    "pagePath": "pages/luntan/index",
+			    "text": "论坛",
+			    "iconPath": "icons/hsgcd3.png",
+			    "selectedIconPath": "icons/hsgcd3_active.png" 
+			},
+
+			
+            {
+                "pagePath": "pages/user/index",
+                "text": "我的",
+                "iconPath": "icons/my.png",
+                "selectedIconPath": "icons/_my.png"
+            }
+        ]
+    },
+    "style": "v2",
+    "sitemapLocation": "sitemap.json"
+}

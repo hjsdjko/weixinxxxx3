@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>后台管理系统</title>
+<link rel="stylesheet" type="text/css" href="../images/css/style.css">
+<script src="../images/js/jquery.mCustomScrollbar.concat.min.js"></script>
+</head>
+<script language="javascript">
+var old='';
+function menu(name)
+{
+	submenu=eval(""+name+".style");
+	if(old!=submenu)
+	{
+		if(old!='')
+		{
+				old.display='none';
+		}
+		submenu.display='block';
+		old=submenu;
+	}
+	else
+	{
+		submenu.display='none';
+		old='';
+	}
+}
+</script>
+<body>
+<div id="wrapper">
+<header>
+ <h1><img src="../images/admin_logo.png"/></h1>
+ <ul class="rt_nav">
+  <li><a href="#" target="_parent" class="website_icon">站点首页</a></li>
+  <li><a href="#" class="clear_icon">清除缓存</a></li>
+  <li><a href="sy/sy.html" target="hsgmain" class="set_icon">回到桌面</a></li>
+  <li><a @click="logout" style="cursor:pointer;" class="quit_icon">安全退出</a></li>
+ </ul>
+</header>
+<aside class="lt_aside_nav content mCustomScrollbar">
+ <h2>功能菜单</h2>
+ <ul>
+ 	
+<li>
+   <dl>
+    <dt onClick="menu('aahsg1')" style="cursor:pointer" >个人资料管理</dt>
+    <div style="display:none" id="aahsg1">
+	<dd><a href='zhuceyonghu_updt2.html' target='hsgmain'>修改个人资料</a></dd><dd><a href='mod.html' target='hsgmain'>修改密码</a></dd>
+	</div>
+   </dl>
+  </li>
+
+
+
+  <li>
+   <p class="btm_infor">版权所有</p>
+  </li>
+ </ul>
+</aside>
+<section class="rt_wrap content mCustomScrollbar">
+ <div class="rt_content">
+      <iframe frameborder="1" style="margin-top: 0px; " width="100%; " id="hsgmain" name="hsgmain" src="sy/sy.html"></iframe>
+ </div>
+</section>
+</div>
+<script src="../js/my.js"></script>
+<script src="../js/vue2.6.11/vue.min.js"></script>
+<script src="../js/vue2.6.11/axios.js"></script>
+<script>
+       new Vue({
+        el: "#wrapper",
+        data: {
+            user: {},
+            authority: [],
+        },
+        created: function () {
+            this.user = JSON.parse(localStorage.getItem("user"));
+            axios.get("/authority").then(res => {
+                if (res.data.code === '0') {
+                    this.authority = res.data.data;
+                } else {
+                    msg('error', res.data.msg);
+                }
+            });
+        },
+        methods: {
+            logout() {
+                logout();
+            }
+        }
+    });
+</script>
+</body>
+</html>
+  <script type="text/javascript">
+window.onload=function(){
+	document.getElementById('hsgmain').height=window.innerHeight-80;
+}
+</script>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.ShangpinxinxiInfoDao">
+
+    <select id="checkRepeat" resultType="java.lang.Integer">
+        select count(id) from `shangpinxinxi_info` where ${column} = #{value}
+        <if test="id != null">
+            and id != #{id}
+        </if>
+    </select>
+
+  <select id="findByShangpinbianhaozj" resultType="com.example.vo.ShangpinxinxiInfoVo">
+        select * from `shangpinxinxi_info` where `shangpinbianhao` = #{username}
+    </select>
+
+    <select id="findByShangpinmingcheng" resultType="com.example.vo.ShangpinxinxiInfoVo">
+        select `shangpinxinxi_info`.* from `shangpinxinxi_info`
+        where 1 = 1
+        <if test="shangpinmingcheng != null and shangpinmingcheng != '' and shangpinmingcheng != 'all'">
+           and 
+			(
+			`shangpinxinxi_info`.`shangpinmingcheng` like concat('%', #{shangpinmingcheng}, '%')
+			 or `shangpinxinxi_info`.`shangpinbianhao` like concat('%', #{shangpinmingcheng}, '%')             or `shangpinxinxi_info`.`shangpinmingcheng` like concat('%', #{shangpinmingcheng}, '%')             or `shangpinxinxi_info`.`shangpinleibie` like concat('%', #{shangpinmingcheng}, '%')             or `shangpinxinxi_info`.`jiage` like concat('%', #{shangpinmingcheng}, '%')             or `shangpinxinxi_info`.`kucun` like concat('%', #{shangpinmingcheng}, '%')             or `shangpinxinxi_info`.`xiaoliang` like concat('%', #{shangpinmingcheng}, '%')             or `shangpinxinxi_info`.`beizhu` like concat('%', #{shangpinmingcheng}, '%')             
+			)
+        </if>
+        order by `shangpinxinxi_info`.id
+    </select>
+	<!--list23N-->
+    <select id="count" resultType="Integer">
+        select count(id) from `shangpinxinxi_info`
+    </select>
+</mapper>
+

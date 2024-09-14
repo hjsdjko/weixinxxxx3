@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.YonghuDao">
+  <select id="checkRepeat" resultType="java.lang.Integer">
+    select count(id) from `yonghu` where ${column} = #{value}
+    <if test="id != null">
+      and id != #{id}
+    </if>
+  </select>
+    <select id="findByCondition" resultType="com.example.entity.Yonghu" parameterType="com.example.entity.Yonghu">
+        select y.* from `yonghu` y
+        where 1 = 1
+        <if test="name != null and name != ''">
+            and y.`name` like concat('%', #{name}, '%')
+        </if>
+    </select>
+    <select id="findByName" resultType="com.example.entity.Yonghu">
+        select * from `yonghu`
+        where 1 = 1
+        <if test="name != null and name != 'all' and name != ''">
+            and `name` = #{name}
+        </if>
+    </select>
+</mapper>

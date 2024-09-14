@@ -1,0 +1,201 @@
+.cart_content {
+  padding-bottom: 90rpx;
+}
+.cart_content .cart_title {
+  padding: 20rpx;
+  font-size: 36rpx;
+  color: var(--themeColor);
+  border-top: 1rpx solid currentColor;
+  border-bottom: 1rpx solid currentColor;
+}
+.cart_content .cart_main .cart_item {
+  display: flex;
+  padding: 10rpx;
+  border-bottom: 1rpx solid #ccc;
+}
+.cart_content .cart_main .cart_item .cart_chk_wrap {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cart_content .cart_main .cart_item .cart_img_wrap {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cart_content .cart_main .cart_item .cart_img_wrap image {
+  width: 80%;
+}
+.cart_content .cart_main .cart_item .cart_info_wrap {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.cart_content .cart_main .cart_item .cart_info_wrap .goods_name {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  color: #666;
+}
+.cart_content .cart_main .cart_item .cart_info_wrap .goods_price_wrap {
+  display: flex;
+  justify-content: space-between;
+}
+.cart_content .cart_main .cart_item .cart_info_wrap .goods_price_wrap .goods_price {
+  color: red;
+  font-size: 34rpx;
+}
+.cart_content .cart_main .cart_item .cart_info_wrap .goods_price_wrap .cart_num_tool {
+  display: flex;
+}
+.cart_content .cart_main .cart_item .cart_info_wrap .goods_price_wrap .cart_num_tool .num_edit {
+  width: 55rpx;
+  height: 55rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1rpx solid #ccc;
+}
+.cart_content .cart_main .cart_item .cart_info_wrap .goods_price_wrap .cart_num_tool .goods_num {
+  width: 55rpx;
+  height: 55rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer_tool {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 90rpx;
+  background-color: #fff;
+  display: flex;
+  border-top: 1rpx solid #ccc;
+}
+.footer_tool .total_price_wrap {
+  flex: 5;
+  padding-left: 40rpx;
+  text-align: left;
+}
+.footer_tool .total_price_wrap .total_price .total_price_text {
+  color: var(--themeColor);
+  font-size: 34rpx;
+  font-weight: 600;
+}
+.footer_tool .order_pay_wrap {
+  flex: 3;
+  background-color: var(--themeColor);
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer_tool2 {
+  position: fixed;
+  bottom: 45px;
+  left: 0;
+  width: 100%;
+  height: 180rpx;
+  background-color: #fff;
+  display: flex;
+  border-top: 1rpx solid #ccc;
+}
+.footer_tool2 .total_price_wrap {
+  flex: 5;
+  padding-left: 40rpx;
+  text-align: left;
+}
+.icon-address{
+  width: 25px;
+  height: 25px;
+}
+.footer_tool2 .total_price_wrap .total_price .total_price_text {
+  color: var(--themeColor);
+  font-size: 34rpx;
+  font-weight: 600;
+}
+.footer_tool2 .order_pay_wrap {
+  flex: 3;
+  background-color: var(--themeColor);
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer_tool2 .order_pay_wrap2 {
+  flex: 3;
+  background-color:#1aad19;
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.no_address {
+color: red;
+}
+.btn_pay{
+  margin: 100rpx auto; width: 600rpx; height: 100rpx; line-height: 100rpx; border-radius: 100rpx;
+  background-color: #d3a95a; color: #fff; font-size: 36rpx; text-align: center; 
+}
+/* 支付密码css start */
+.bg_layer{
+  position: fixed; left: 0; top: 0; bottom: 0; right: 0;
+  background-color: rgba(0, 0, 0, 0.6); z-index: 9998;
+}
+.input_main{
+    position: fixed; left: 0; bottom: 500rpx; width: 100%; height: 394rpx;
+    background-color: #fff; z-index: 9999;
+}
+.input_title{
+    width: 100%; height: 90rpx; line-height: 90rpx; text-align: center; 
+    font-size: 32rpx; border-bottom: 1rpx solid #e2e2e2;
+}
+.input_back{
+    position: absolute; left: 0; top: 0;
+    width: 80rpx; height: 90rpx; display: flex; justify-content: center; align-items: center;
+}
+.input_back text{
+  width: 20rpx;
+  height: 20rpx;
+  background-color: white;
+  border: 1rpx solid #aaa;
+  border-width: 5rpx 0 0 5rpx;
+  transform: rotate(-45deg);
+}
+
+.input_tip{  margin: 30rpx; font-size: 24rpx; color: #888; }
+
+/* 密码掩码模拟 */
+.input_row{
+  width: 690rpx; margin: 0 auto; height: 98rpx; position: relative;
+  display: flex; align-items: center; border: 1rpx solid #e2e2e2; border-radius: 20rpx;
+}
+.input_row .pwd_item{
+  flex: 1; display: flex; align-items: center; justify-content: center; 
+  height: 100%; border-right: 1rpx solid #e2e2e2; position: relative;
+}
+.pwd_item:nth-last-of-type(1) { border-right: 0; } 
+.pwd_item text { 
+  width: 30rpx; height: 30rpx; border-radius: 30rpx; background-color: #555;
+}
+
+
+.forget_pwd{ 
+  float: right; margin: 30rpx; width: 100rpx; text-align: right; font-size: 24rpx; color: #ff7800;
+}
+
+/* 文本输入框位置: 设置到左边隐藏 */
+.input_control { 
+  position: relative; left: -300rpx; bottom: 0; width: 100rpx; height: 100rpx;
+}

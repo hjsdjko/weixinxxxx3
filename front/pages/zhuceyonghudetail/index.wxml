@@ -1,0 +1,8 @@
+<view class="nx_detail">
+  <view class="nx_detail_main">
+  	<view class="nx_detail_main_item">    <view class="nx_detail_main_item_left">账号</view>    <view class="nx_detail_main_item_right">{{obj.zhanghao}}</view>    </view>    <view class="nx_detail_main_item">    <view class="nx_detail_main_item_left">姓名</view>    <view class="nx_detail_main_item_right">{{obj.xingming}}</view>    </view>    <view class="nx_detail_main_item">    <view class="nx_detail_main_item_left">性别</view>    <view class="nx_detail_main_item_right">{{obj.xingbie}}</view>    </view>    <view class="nx_detail_main_item">    <view class="nx_detail_main_item_left">手机</view>    <view class="nx_detail_main_item_right">{{obj.shouji}}</view>    </view>    <view class="nx_detail_main_item">    <view class="nx_detail_main_item_left">身份证</view>    <view class="nx_detail_main_item_right">{{obj.shenfenzheng}}</view>    </view>    <view class="nx_detail_main_item">    <view class="nx_detail_main_item_left">备注</view>    <view class="nx_detail_main_item_right">{{obj.beizhu}}</view>    </view>    
+	<view class="nx_detail_main_item">    <view class="nx_detail_main_item_left">照片</view>    </view>    <image  src="{{obj.zhaopian}}"></image>    
+  </view>
+  <!--jixaaxnnxiu-->
+  <!--dxaizhxifu-->
+</view>

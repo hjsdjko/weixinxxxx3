@@ -1,0 +1,13 @@
+<view class="container">
+
+<view class="login-icon">
+  <image class="login-img" src="/imgs/dayin.png"></image>
+</view>
+
+<view class="login-from">
+  <view class="loginBtnView"> 
+    <button type="primary" bindtap="login">微信登录</button>
+  </view> 
+</view>
+
+</view>

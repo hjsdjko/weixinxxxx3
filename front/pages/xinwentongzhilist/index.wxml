@@ -1,0 +1,46 @@
+<!--index.wxml-->
+<view class="index">
+<!-- 轮播图开始 -->
+<view class="swiper">
+    <view class="swiper-box">
+      <swiper circular="true" autoplay="true" data-event-opts="" >
+        <block >
+          <swiper-item>
+            <image src="../../images/banner1.jpg" data-event-opts="" ></image>
+          </swiper-item>
+          <swiper-item>
+            <image src="../../images/banner2.jpg" data-event-opts="" ></image>
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class="indicator">
+        <block >
+          <view class=""></view>
+        </block>
+        <block >
+          <view class=""></view>
+        </block>
+        <block   wx:key="index">
+          <view class=""></view>
+        </block>
+        <block   wx:key="index">
+          <view class=""></view>
+        </block>
+      </view>
+    </view>
+  </view>
+<!-- 轮播图结束 -->
+<view class="nx_line">
+    <view class="nx_line_title">新闻数据</view>
+    <view class="nx_line_list">
+        <navigator class="nx_line_item" wx:for="{{xinwentongzhiList}}" wx:for-item="item" wx:key="id" url="/pages/xinwentongzhi/index?id={{item.id}}">
+            <view style="flex:1；">
+                <view class="nx_item_name">{{item.biaoti}}</view>
+                <view class="nx_item_name">{{item.leibie}}</view>
+            </view>
+        </navigator>
+    </view>
+</view>
+
+
+</view>

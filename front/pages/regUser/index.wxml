@@ -1,0 +1,53 @@
+<view class="container">
+
+<!-- <view class="login-icon">
+  <image class="login-img" src="/images/img-home.jpg"></image>
+</view> -->
+
+<view class="login-from">
+  <!--账号-->
+  <view class="inputView">
+    <label class="loginLab">账号</label>
+    <input class="inputText" type="text" placeholder="请输入账号" bindinput="phoneInput" />
+  </view>
+
+  <view class="line"></view>
+
+  <!--密码-->
+  <view class="inputView">
+    <label class="loginLab">密码</label>
+    <input class="inputText" password="true" placeholder="请输入密码" bindinput="passwordInput" />
+  </view>
+
+   <view class="line"></view>
+  <!--姓名-->
+  <view class="inputView">
+    <label class="loginLab">姓名</label>
+    <input class="inputText" type="text" placeholder="请输入姓名" bindinput="nameInput" />
+  </view>
+
+  <view class="line"></view>
+
+  <picker class="pick-bg" bindchange="bindPickerChange" value="{{sex}}" range="{{array}}">
+    <view class="picker">
+      性别：{{sex}}
+    </view>
+  </picker>
+
+  <view class="line"></view>
+  <!--年龄-->
+
+  <!--手机号-->
+  <view class="inputView">
+    <label class="loginLab">手机</label>
+    <input class="inputText" type="text" placeholder="请输入手机号" bindinput="phonesInput" />
+  </view>
+
+<view class="line"></view>
+  <!--按钮-->
+  <view class="loginBtnView">
+    <button class="loginBtn" type="primary" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="login">注册</button>
+  </view>
+</view>
+
+</view>

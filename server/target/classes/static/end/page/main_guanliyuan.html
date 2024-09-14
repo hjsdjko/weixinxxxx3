@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>农产品扶贫助农系统</title>
+    <link rel="stylesheet" href="../images/css/entypo.css">
+    <link rel="stylesheet" href="../images/css/bootstrap.css">
+    <link rel="stylesheet" href="../images/css/neon-core.css">
+    <script src="../images/js/jquery-1.11.0.min.js"></script>
+</head>
+<body class="page-body  page-fade" >
+<div id="wrapper">
+    <div class="page-container">
+        <div class="sidebar-menu">
+            <header class="logo-env">
+                <div class="logo">
+                    <a href=""><img src="../images/picture/logo@2x.png" width="120" alt=""></a></div>
+                <div class="sidebar-collapse">
+                    <a href="#" class="sidebar-collapse-icon with-animation">
+                        <i class="entypo-menu"></i></a></div>
+                <div class="sidebar-mobile-menu visible-xs"><a href="#" class="with-animation"><i class="entypo-menu"></i></a></div>
+            </header>
+            <ul id="main-menu" class="">
+
+                <li><a><i class="entypo-hsg1"></i><span>系统用户管理</span></a>
+                    <ul>
+                        <li><a href='yhzhgl.html' target='hsgmain'>管理员用户</span></a></li>
+                        <li><a href='mod.html' target='hsgmain'>修改密码</span></a></li>
+                        <li><a href='xitongyonghu.html' target='hsgmain'>微信用户</span></a></li>
+                    </ul>
+                </li>
+
+
+                <li><a><i class="entypo-hsg7"></i><span>农产品类别管理</span></a>
+                    <ul>
+                        <li><a href='shangpinleibieInfo.html' target='hsgmain'>农产品类别查询</span></a></li>
+
+                    </ul>
+                </li>
+                <li><a><i class="entypo-hsg8"></i><span>农产品管理</span></a>
+                    <ul>
+                        <li><a href='shangpinxinxiInfo.html' target='hsgmain'>农产品查询</span></a></li>
+
+                    </ul>
+                </li>
+                <li><a><i class="entypo-hsg9"></i><span>注册用户管理</span></a>
+                    <ul>
+                        <li><a href='zhuceyonghuInfo.html' target='hsgmain'>注册用户查询</span></a></li>
+
+                    </ul>
+                </li>
+                <li><a><i class="entypo-hsg10"></i><span>购买管理</span></a>
+                    <ul>
+                        <li><a href='goumaiInfo.html' target='hsgmain'>购买查询</span></a></li>
+
+                    </ul>
+                </li>
+                <li><a><i class="entypo-hsg11"></i><span>论坛</span></a>
+                    <ul>
+                        <li><a href='luntanInfo.html' target='hsgmain'>论坛</span></a></li>
+
+
+                    </ul>
+                </li>
+
+                <li><a><i class="entypo-hsg12"></i><span>扶贫政策</span></a>
+                    <ul>
+                        <li><a href='xiaoyuantongzhiInfo.html' target='hsgmain'>扶贫政策</span></a></li>
+
+
+                    </ul>
+                </li>
+
+                <li><a><i class="entypo-hsg13"></i><span>公告</span></a>
+                    <ul>
+                        <li><a href='gonggaoxinxiInfo.html' target='hsgmain'>公告</span></a></li>
+
+
+                    </ul>
+                </li>
+
+                <li><a><i class="entypo-hsg14"></i><span>贫困申请认证</span></a>
+                    <ul>
+                        <li><a href='pinkunrenzhengshenqingInfo.html' target='hsgmain'>贫困申请认证</span></a></li>
+
+
+                    </ul>
+                </li>
+
+                <li><a><i class="entypo-hsg15"></i><span>农产品评论</span></a>
+                    <ul>
+                        <li><a href='nongchanpinpinglunInfo.html' target='hsgmain'>农产品评论</span></a></li>
+
+
+                    </ul>
+                </li>
+
+
+
+
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="row">
+                <div class="col-md-6 col-sm-8 clearfix">
+                    <ul class="user-info pull-left pull-none-xsm">
+                        <li class="profile-info dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="../images/picture/thumb-1@2x.png" alt="" class="img-circle" width="44">{{user.username}}[{{user.level}}]</a></li>
+                    </ul>
+                    <ul class="user-info pull-left pull-right-xs pull-none-xsm"></ul>
+                </div>
+                <div class="col-md-6 col-sm-4 clearfix hidden-xs">
+                    <ul class="list-inline links-list pull-right">
+                        <li class="sep"></li>
+                        <li><a href="#" data-toggle="chat" data-animate="1" data-collapse-sidebar="1"><i class="entypo-chat"></i>首页</a></li>
+                        <li class="sep"></li>
+                        <li><a @click="logout" style="cursor:pointer;">退出 <i class="entypo-logout right"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <iframe frameborder="1" style="margin-top: 0px; " width="100%; " id="hsgmain" name="hsgmain" src="sy/sy.html"></iframe>
+            </div>
+            <footer> Copyright &copy; <script>document.write(new Date().getFullYear());</script>.Company name All rights reserved.农产品扶贫助农系统</footer>
+        </div>
+    </div>
+    <script src="../images/js/main-gsap.js"></script>
+    <script src="../images/js/joinable.js"></script>
+    <script src="../images/js/resizeable.js"></script>
+    <script src="../images/js/neon-api.js"></script>
+    <script src="../images/js/neon-custom.js"></script>
+</div>
+<script src="../js/my.js"></script>
+<script src="../js/vue2.6.11/vue.min.js"></script>
+<script src="../js/vue2.6.11/axios.js"></script>
+<script>
+    new Vue({
+        el: "#wrapper",
+        data: {
+            user: {},
+            authority: [],
+        },
+        created: function () {
+            this.user = JSON.parse(localStorage.getItem("user"));
+            axios.get("/authority").then(res => {
+                if (res.data.code === '0') {
+                    this.authority = res.data.data;
+                } else {
+                    msg('error', res.data.msg);
+                }
+            });
+        },
+        methods: {
+            logout() {
+                logout();
+            }
+        }
+    });
+</script>
+</body>
+</html>
+<script type="text/javascript">
+    window.onload=function(){
+        document.getElementById('hsgmain').height=window.innerHeight-120;
+    }
+</script>

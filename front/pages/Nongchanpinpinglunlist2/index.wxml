@@ -1,0 +1,13 @@
+﻿<view class="container">
+	<view class="nx_line_title">
+	  <span>农产品评论</span>
+	  <span  style="float:right;color:red;font-weight: bold; " bindtap="hsgadd">+</span>
+	</view> 
+    <view class="nx_line_list">
+        <navigator class="nx_line_item" wx:for="{{NongchanpinpinglunList}}" wx:for-item="item" wx:key="id" url="/pages/nongchanpinpinglundetail/index?id={{item.id}}">
+            <view style="display:flex;flex:1">
+                <view class="nx_item_name" style="width:70%">商品编号：{{item.shangpinbianhao}}</view>    <view class="nx_item_name" style="width:70%">商品名称：{{item.shangpinmingcheng}}</view>    <view class="nx_item_name" style="width:70%">评分：{{item.pingfen}}</view>    
+            </view>
+        </navigator>
+    </view>
+</view>

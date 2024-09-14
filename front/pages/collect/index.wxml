@@ -1,0 +1,28 @@
+<!-- 行列表开始 -->
+  <view class="nx_line">
+    <view class="nx_line_list">
+      <block wx:if="{{dataList.length !== 0}}">
+         <view class="nx_line_item" wx:for="{{dataList}}" wx:for-item="item" wx:key="id">
+        <navigator style="display: flex;" url="/pages/goodsInfo/index?id={{item.foreignId}}">
+          <view class="nx_line_left" >
+            <image mode="scaleToFill" src="{{item.url}}"></image>
+          </view>
+          <view class="nx_line_mid">
+            <view style="color: #000; padding: 15rpx 0">名称：{{item.shangpinxinxiInfoList[0].shangpinmingcheng}}</view>
+            <view style="padding-top: 20rpx">类别：{{item.shangpinxinxiInfoList[0].shangpinleibie}}</view>
+          </view>
+          <view class="nx_line_right">
+            <text style="color: red">￥{{item.shangpinxinxiInfoList[0].jiage}}</text>
+          </view>
+        </navigator>
+        <view style="text-align: right; padding: 40rpx 0 20rpx 0;">
+          <text class="btn" style="background-color: red; color: #fff" data-id="{{item.id}}" bindtap="deleteOrder">删除</text>
+        </view>
+      </view>
+      </block>
+      <block wx:else>
+      <image mode="widthFix" src="http://hbimg.b0.upaiyun.com/e1b1467beea0a9c7d6a56b32bac6d7e5dcd914f7c3e6-YTwUd6_fw658" ></image>
+    </block>
+    </view>
+  </view>
+  <!-- 行列表结束 -->

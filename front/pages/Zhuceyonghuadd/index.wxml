@@ -1,0 +1,32 @@
+<view class="container">
+<view class="login-from">
+	<view class="inputView">
+    <label class="loginLab">账号</label>
+    <input class="inputText" type="text" placeholder="请输入账号" bindinput="zhanghaoInput" value=""  />
+  </view>		<view class="inputView">
+    <label class="loginLab">密码</label>
+    <input class="inputText" type="text" placeholder="请输入密码" bindinput="mimaInput" value=""  />
+  </view>		<view class="inputView">
+    <label class="loginLab">姓名</label>
+    <input class="inputText" type="text" placeholder="请输入姓名" bindinput="xingmingInput" value=""  />
+  </view>		<picker class="pick-bg" bindchange="bindPickerChangexingbie" range="{{xingbiearray}}">
+    <view class="picker">
+      性别：{{xingbie}}
+    </view>
+  </picker>		<view class="inputView">
+    <label class="loginLab">手机</label>
+    <input class="inputText" type="text" placeholder="请输入手机" bindinput="shoujiInput" value=""  />
+  </view>		<view class="inputView">
+    <label class="loginLab">身份证</label>
+    <input class="inputText" type="text" placeholder="请输入身份证" bindinput="shenfenzhengInput" value=""  />
+  </view>		<view class='edit-main'  style="background-color:white;">
+    <label class="loginLab">照片</label>
+    <image wx:if="{{zhaopianx == ''}}" src='../../imgs/addimg.png' bindtap="uploadimg" style='width:200rpx;height:200rpx;'></image>
+    <image wx:else src='{{zhaopianx}}' bindtap="uploadimg" style='width:200rpx;height:200rpx;'></image>
+</view>				
+  <view class="line"></view>
+  <view class="loginBtnView">
+    <button class="loginBtn" type="primary" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="login">提交</button>
+  </view>
+</view>
+</view>

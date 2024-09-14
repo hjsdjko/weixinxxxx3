@@ -1,0 +1,22 @@
+<view class="nx_line">
+    <view class="nx_line_title" style="text-align:center">作品列表</view>
+    <view class="nx_line_list">
+        <navigator class="nx_line_item" wx:for="{{userTextInfoList}}" wx:for-item="item" wx:key="id" url="/pages/userTextInfo/index?id={{item.id}}">
+            <view style="flex:1">
+                <image style="height:300rpx;width:300rpx" mode="scaleToFill" src="{{item.url}}"></image>
+            </view>
+            <view style="flex:1; padding: 0 30rpx; position: relative">
+                <view class="nx_item_name">{{item.title}}</view>
+                <view class="desc">{{item.description}}</view>
+                <view style="position: absolute; bottom: 10rpx;margin-left:10rpx;display:flex;align-items:center">
+                    <image src="{{item.avater}}" class="face"></image>
+                    <text>{{item.userName}}</text>
+                    <image class="nameImage" src="../../icons/查看.png">{{item.click}}</image>
+                    <text>{{item.click}}</text>
+                    <image class="nameImage" src="../../icons/评论.png">{{item.commentStatus}}</image>
+                    <text>{{item.commentCount}}</text>
+                </view>
+            </view>
+        </navigator>
+    </view>
+</view>

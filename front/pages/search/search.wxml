@@ -1,0 +1,20 @@
+
+<!-- 搜索 -->
+<view class="nx_congar">
+     <input class="input" auto-focus="true" bindinput="search" placeholder="请输入菜品名称"/>
+  </view>
+<!-- 本站菜品开始 -->
+<view class="nx_line">
+    <view class="nx_line_list">
+        <navigator class="nx_line_item" wx:for="{{goodsInfoGoodsList}}" wx:for-item="item" wx:key="id" url="/pages/shangpinxinxidetail/index?id={{item.id}}">
+            <view style="flex:1">
+                <image style="height: 260rpx" mode="scaleToFill" src="{{item.url}}"></image>
+            </view>
+            <view style="flex:1; padding: 0 30rpx; position: relative">
+                <view class="nx_item_name">{{item.shangpinmingcheng}}</view>
+               
+            </view>
+        </navigator>
+    </view>
+</view>
+<!--本站菜品结束 -->

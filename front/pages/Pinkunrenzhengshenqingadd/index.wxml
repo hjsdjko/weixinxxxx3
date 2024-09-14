@@ -1,0 +1,22 @@
+﻿<view class="container">
+<view class="login-from">
+	<view class="inputView">
+    <label class="loginLab">申请标题</label>
+    <input class="inputText" type="text" placeholder="请输入申请标题" bindinput="shenqingbiaotiInput" value=""  />
+  </view>		<view class='edit-main'  style="background-color:white;">
+    <label class="loginLab">贫困证书</label>
+    <image wx:if="{{pinkunzhengshux == ''}}" src='../../imgs/addimg.png' bindtap="uploadimg" style='width:200rpx;height:200rpx;'></image>
+    <image wx:else src='{{pinkunzhengshux}}' bindtap="uploadimg" style='width:200rpx;height:200rpx;'></image>
+</view>		<view class="inputView"><label class="loginLab">申请说明</label><textarea  type="" style="height:100px;" placeholder="请输入申请说明" bindinput="shenqingshuomingInput" value="" ></textarea></view>		<view class="inputView">
+    <label class="loginLab">账号</label>
+    <input class="inputText" type="text" placeholder="请输入账号" bindinput="zhanghaoInput" value="{{zhanghao}}" disabled />
+  </view>		<view class="inputView">
+    <label class="loginLab">姓名</label>
+    <input class="inputText" type="text" placeholder="请输入姓名" bindinput="xingmingInput" value="{{xingming}}" disabled />
+  </view>		
+  <view class="line"></view>
+  <view class="loginBtnView">
+    <button class="loginBtn" type="primary" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="login">提交</button>
+  </view>
+</view>
+</view>

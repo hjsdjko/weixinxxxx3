@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml"
+      xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT"/>
+    <title>论坛帖子信息</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/font-awesome.css">
+    <link rel="stylesheet" href="../css/element/index.css">
+    <link rel="stylesheet" href="../css/hsg.css">
+    <link rel="stylesheet" href="../css/quill.snow.css">
+
+</head>
+<body>
+<div id="wrapper" v-cloak>
+    <div >
+        <div style="padding: 0 20px">
+            <div>
+                <div style="color: #666; font-weight: bold; border-bottom: 1px solid #ccc; padding: 10px 0; margin-bottom: 20px; font-size: 30px;">论坛帖子信息</div>
+            </div>
+            <div style="margin-top: 10px">
+                <div style="border: 1px solid #ff6b31;">
+                    <div style="padding: 5px; border-bottom: 1px solid #ff6b31; color: white; background-color: #ff6b31;">用户分享作品表</div>
+                    <div style="border: 1px solid #ccc; padding: 10px">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover" style="margin-top: 10px">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>标题</th>
+                                    <th>简述</th>
+                                    <th>封面</th>
+                                    <th>点击次数</th>
+                                    <th>评论次数</th>
+                                    <th>审核状态</th>
+                                    <th>审核理由</th>
+                                    <th>是否分享</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody v-for="obj in objs">
+                                <tr>
+                                    <td>{{obj.id}}</td>
+                                    <td><div style="height:20px;width: 100px; overflow:hidden; text-overflow: ellipsis;">
+                                        {{obj.title}}
+                                    </div></td>
+                                    <td><div style="height:20px; width: 200px; overflow:hidden; text-overflow: ellipsis;">
+                                        {{obj.description}}
+                                    </div></td>
+                                    <td>
+                                        <button class="btn btn-primary btn-xs" @click="viewModal(obj)">预览</button>
+                                        <button class="btn btn-primary btn-xs" @click="updateModal(obj)">更换封面</button>
+                                    </td>
+                                    <td>
+                                        {{obj.click}}次
+                                    </td>
+                                    <td>
+                                        {{obj.commentCount}}条
+                                    </td>
+                                    <td>{{obj.status}}</td>
+                                    <td>{{obj.reason}}</td>
+                                    <td>{{obj.fenxiang}}</td>
+                                    <td>
+                                        <button class="btn btn-primary btn-xs" @click="shenhe(obj)" v-if="obj.status =='待审核'">审核</button>
+                                        <button class="btn btn-primary btn-xs" @click="fenxiang(obj)" v-if="obj.fenxiang =='否'">分享</button>
+                                        <button class="btn btn-warning btn-xs" @click="quxiaofenxiang(obj)" v-if="obj.fenxiang !='否'">取消分享</button>
+                                        <button class="btn btn-primary btn-xs" @click="init(obj)">编辑</button>
+                                        <button class="btn btn-danger btn-xs" @click="del(obj)">删除</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <!--danhxexiaxnshi-->
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    <li class="page-item" v-bind:class="{ disabled: preActive }">
+                                        <a class="page-link" href="javascript:void(0)"
+                                           v-on:click="loadTable(pageInfo.pageNum - 1)">上一页</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="javascript:void(0)" v-if="pageInfo.pageNum > 1" v-on:click="loadTable(pageInfo.pageNum - 1)">{{pageInfo.pageNum - 1}}</a>
+                                    </li>
+                                    <li class="page-item disabled">
+                                        <a class="page-link" aria-disabled="true" href="javascript:void(0)">{{pageInfo.pageNum}}</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="javascript:void(0)" v-if="pageInfo.hasNextPage" v-on:click="loadTable(pageInfo.pageNum + 1)">{{pageInfo.pageNum + 1}}</a>
+                                    </li>
+                                    <li class="page-item" v-bind:class="{ disabled: nextActive }">
+                                        <a class="page-link" href="javascript:void(0)" v-on:click="loadTable(pageInfo.hasNextPage? (pageInfo.pageNum + 1) : pageInfo.pageNum)">下一页</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" role="dialog" id="verifyModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="modal-title">请填写信息</span>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="entity={}">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <input type="hidden" v-model="entity.id">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">审核结果</label>
+                            <div class="col-sm-7">
+                                <label class="radio-inline">
+                                    <input type="radio" value="审核通过" v-model="entity.status">审核通过
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="审核不通过" v-model="entity.status">审核不通过
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">理由</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" v-model="entity.reason" placeholder="请输入理由">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="entity={}">关闭</button>
+                    <button type="button" class="btn btn-primary" @click="updateVerify()">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="updateModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    查看
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="cancelUpdate">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="view-img3" class="modal-body" style="text-align: center">
+                </div>
+                <div style="margin-top: 8px;margin-left: 80px">
+                    <input @change="upload" @click="clearFile" multiple="multiple" type="file" ref="file">
+                </div>
+                <div style="text-align: center">
+                    <button type="button" class="btn btn-primary" @click="update()">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    查看
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="cancel">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="view-img" class="modal-body" style="text-align: center">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" role="dialog" id="carousel2">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="modal-name">请填写相关信息</span>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="entity={}">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body panel-body">
+                    <div class="form-horizontal">
+                        <input type="hidden" name="id" id="modal-id2" v-model="entity.id">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">分数</label>
+                            <div class="col-sm-7">
+                                <input type="number" id="modal-fenshu" class="form-control" v-model="entity.fenshu" placeholder="请输入分数">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">评语</label>
+                            <div class="col-sm-7">
+                                <input type="text" id="modal-pingyu" class="form-control" v-model="entity.pingyu" placeholder="请输入评语">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="entity={}">关闭</button>
+                    <button type="button" class="btn btn-primary" id="saveBtn2">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!--m_liangbumod-->
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="carousel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-name">请填写相关信息</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="entity={}">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body panel-body">
+                <div class="form-horizontal">
+                    <input type="hidden" name="id" id="modal-id" v-model="entity.id">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">作品标题</label>
+                        <div class="col-sm-7">
+                            <input type="text" id="modal-title" class="form-control" v-model="entity.title" placeholder="请输入作品标题">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">作品简述</label>
+                        <div class="col-sm-7">
+                            <input type="text" id="modal-description" class="form-control" v-model="entity.description" placeholder="请输入作品简述">
+                        </div>
+                    </div>
+                </div>
+                <div id="editor" style="min-height: 300px"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="entity={}">关闭</button>
+                <button type="button" class="btn btn-primary" id="saveBtn">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/nav.js"></script>
+<script src="../js/my.js"></script>
+<script src="../js/vue2.6.11/vue.min.js"></script>
+<script src="../js/vue2.6.11/axios.js"></script>
+<script src="../js/element/index.js"></script>
+<script src="../js/quill.js"></script>
+<script>
+    function msg(type, msg) {
+        Vue.prototype.$message({
+            type: type, // success（成功）、warning（警告）, error(错误)
+            message: msg,
+            duration: 2000,
+            offset: 100,
+            center: true
+        })
+    }
+    let quill = new Quill('#editor', {
+        theme: 'snow',
+        modules: {
+            toolbar: {
+                container: [
+                    [{'header': [1, 2, 3, 4, 5, 6, false]}],        // title字体
+                    [{'font': []}],                                 // 字体
+                    ['bold', 'italic', 'underline', 'strike'],        // 切换按钮
+                    [{'align': []}],                                // 对齐方式
+                    ['blockquote', 'code-block'],                     // 文本块/代码块
+                    [{'header': 1}, {'header': 2}],               // 自定义按钮值
+                    [{'list': 'ordered'}, {'list': 'bullet'}],     // 有序/无序列
+                    [{'indent': '-1'}, {'indent': '+1'}],          // 减少缩进/缩进
+                    [{'color': []}, {'background': []}],          // 主题默认下拉，使用主题提供的值
+                    ['clean'],                                        // 清除格式
+                    ['image', 'link', 'video']                        // 图片 / 链接 / 视频
+                ]
+            }
+
+        }
+    });
+    let wrapper  = new Vue({
+        el: '#wrapper',
+        data: {
+            authority: [],
+            typeObjs: [],
+            user: {},
+            name: '',
+            objs: [],
+            pageInfo: {},
+            preActive: true,
+            nextActive: true,
+            entity: {}
+        },
+        created: function () {
+            this.user = JSON.parse(localStorage.getItem("user"));
+            this.loadTable(1);
+        },
+        methods: {
+            loadTable(pageNum) {
+                axios.get("/userTextInfo/page/all"+ "?pageNum=" + pageNum).then(res => {
+                    if (res.data.code === '0') {
+                        this.objs = res.data.data.list;
+                        this.pageInfo = res.data.data;
+                        this.preActive = !(this.pageInfo.hasPreviousPage);
+                        this.nextActive = !(this.pageInfo.hasNextPage);
+                    } else {
+                        msg('error', res.data.msg);
+                    }
+                });
+            },
+            init(o) {
+                if (this.user.level === 3) {
+                    msg('warning', '你没有操作的权限');
+                    return;
+                }
+                this.entity = JSON.parse(JSON.stringify(o));
+                $("#view-img2").empty();
+                if(this.entity.fileIds){
+                    JSON.parse(this.entity.fileIds).forEach(item=>{
+                        $("#view-img2").append($(`<img id="img-id" src="/files/download/${item}" style="width: 400px; margin-bottom: 5px" alt="">`));
+                    })
+                }
+                debugger
+                $('#modal-id').val(this.entity.id);
+                $('#modal-title').val(this.entity.title);
+                $('#modal-description').val(this.entity.description);
+                quill.root.innerHTML = this.entity.content;
+                $('#carousel').modal('show');
+            },
+            fenxiang(o){
+                if (this.user.level === 3) {
+                    msg('warning', '你没有操作的权限');
+                    return;
+                }
+                let _this = this;
+                this.$confirm('确认分享？', '系统提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    cancelButtonClass: 'btn-custom-cancel',
+                    type: 'warning'
+                }).then(function(){
+                    axios.get("/userTextInfo/fenxiang/" + o.id).then(res => {
+                        if (res.data.code === '0') {
+                            msg('success', '分享成功');
+                            _this.loadTable(1);
+                        } else {
+                            msg('error', res.data.msg);
+                        }
+                    });
+                }).catch(function() {
+                    console.log("取消成功！");
+                });
+            },
+            quxiaofenxiang(o){
+                if (this.user.level === 3) {
+                    msg('warning', '你没有操作的权限');
+                    return;
+                }
+                let _this = this;
+                this.$confirm('确认取消分享？', '系统提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    cancelButtonClass: 'btn-custom-cancel',
+                    type: 'warning'
+                }).then(function(){
+                    axios.get("/userTextInfo/quxiaofenxiang/" + o.id).then(res => {
+                        if (res.data.code === '0') {
+                            msg('success', '取消分享成功');
+                            _this.loadTable(1);
+                        } else {
+                            msg('error', res.data.msg);
+                        }
+                    });
+                }).catch(function() {
+                    console.log("取消成功！");
+                });
+            },
+            pingfen(o) {
+                if (this.user.level === 3) {
+                    msg('warning', '你没有操作的权限');
+                    return;
+                }
+                this.entity = JSON.parse(JSON.stringify(o));
+                $('#modal-id2').val(this.entity.id);
+                $('#modal-pinfen').val('');
+                $('#modal-pingyu').val('');
+                $('#carousel2').modal('show');
+            },
+            updateVerify(){
+                var that = this;
+                axios.put(
+                    "/userTextInfo", this.entity
+                ).then(res => {
+                    if (res.data.code === '0') {
+                        msg('success', '操作成功');
+                        $('#verifyModal').modal('hide');
+                        that.loadTable(1);
+                    } else {
+                        msg('error', res.data.msg);
+                    }
+                })
+            },
+            add() {
+                if (this.user.level === 3) {
+                    msg('warning', '你没有操作的权限');
+                    return;
+                }
+                this.entity = {};
+                $('#modal-title').val('');
+                $('#modal-description').val('');
+                quill.root.innerHTML = '';
+                $("#view-img2").empty();
+                $('#carousel').modal('show');
+            },
+            shenhe(o){
+                if (o.status === '待审核') {
+                    this.entity = JSON.parse(JSON.stringify(o));
+                    // 审核状态搞个默认值
+                    this.entity.status = '审核通过';
+                    $('#verifyModal').modal('show');
+                } else {
+                    msg('warning', '管理员已审核，不要重复审核');
+                }
+            },
+            update() {
+                if (this.entity.fileList && this.entity.fileList.length !== 0) {
+                    if (!this.entity.id) {
+                        axios.post("/userTextInfo", this.entity).then(res => {
+                            if (res.data.code === '0') {
+                                msg('success', '操作成功');
+                                $('#carousel').modal('hide');
+                                $('#updateModal').modal('hide');
+                                this.loadTable(1);
+                            } else {
+                                msg('error', res.data.msg);
+                            }
+                        })
+                    } else {
+                        axios.put("/userTextInfo", this.entity).then(res => {
+                            if (res.data.code === '0') {
+                                msg('success', '操作成功');
+                                $('#carousel').modal('hide');
+                                $('#updateModal').modal('hide');
+                                this.loadTable(1);
+                            } else {
+                                msg('error', res.data.msg);
+                            }
+                        })
+                    }
+                }else {
+                    msg('error', '请上传图片');
+                }
+            },
+            del(o) {
+                if (this.user.level === 3) {
+                    msg('warning', '你没有操作的权限');
+                    return;
+                }
+                let _this = this;
+                this.$confirm('确认删除？', '系统提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    cancelButtonClass: 'btn-custom-cancel',
+                    type: 'warning'
+                }).then(function(){
+                    axios.delete("/userTextInfo/" + o.id).then(res => {
+                        if (res.data.code === '0') {
+                            msg('success', '删除成功');
+                            _this.loadTable(1);
+                        } else {
+                            msg('error', res.data.msg);
+                        }
+                    });
+                }).catch(function() {
+                    console.log("取消成功！");
+                });
+            },
+            upload: function () {
+                let files = this.$refs.file.files;
+                for (let i = 0; i < files.length; i++) {
+                    let formData = new FormData();
+                    formData.append('file', files[i]);
+                    axios.post('/files/upload', formData, {
+                        'Content-Type': 'multipart/form-data'
+                    }).then(res => {
+                        if (res.data.code === '0') {
+                            msg('success','上传成功');
+                            this.entity.fileList.push(res.data.data.id);
+                            $("#view-img3").empty();
+                            $("#view-img3").append($(`<img id="img-id" src="/files/download/${res.data.data.id}" style="width: 400px; margin-bottom: 5px" alt="">`));
+                        } else {
+                            msg('error', res.data.msg);
+                        }
+                    })
+                }
+            },
+            clearFile: function() {
+                this.entity.fileList = [];
+            },
+            viewModal: function (data) {
+                axios.get("/userTextInfo/" + data.id).then(res => {
+                    if (res.data.code === '0') {
+                        let fileIds = JSON.parse(res.data.data.fileIds);
+                        $("#view-img").empty();
+                        fileIds.forEach(item => {
+                            $("#view-img").append($(`<img id="img-id" src="/files/download/${item}" style="width: 400px; margin-bottom: 5px" alt="">`));
+                        });
+                        $("#myModal").modal('show');
+                    } else {
+                        msg('error', res.data.msg);
+                    }
+                });
+            },
+            updateModal: function (data) {
+                this.entity.id = data.id
+                axios.get("/userTextInfo/" + data.id).then(res => {
+                    if (res.data.code === '0') {
+                        let fileIds = JSON.parse(res.data.data.fileIds);
+                        $("#view-img3").empty();
+                        fileIds.forEach(item => {
+                            $("#view-img3").append($(`<img id="img-id" src="/files/download/${item}" style="width: 400px; margin-bottom: 5px" alt="">`));
+                        });
+                        $("#updateModal").modal('show');
+                    } else {
+                        msg('error', res.data.msg);
+                    }
+                });
+            },
+            cancel: function () {
+            },
+            cancelUpdate: function () {
+            },
+            logout() {
+                logout();
+            }
+        }
+    })
+    $('#saveBtn').click(function () {
+        let entity = wrapper.$data.entity;
+        entity.content = quill.root.innerHTML;
+        entity.title = $('#modal-title').val();
+        entity.description = $('#modal-description').val();
+        if (!$('#modal-id').val()) {
+            axios.post(
+                "/userTextInfo", entity
+            ).then(res => {
+                if (res.data.code === '0') {
+                    msg('success', '操作成功');
+                    wrapper.loadTable(1);
+                } else {
+                    msg('error', res.data.msg);
+                }
+            })
+        } else {
+            entity.id = $('#modal-id').val();
+            axios.put(
+                "/userTextInfo", entity
+            ).then(res => {
+                if (res.data.code === '0') {
+                    msg('success', '操作成功');
+                    wrapper.loadTable(1);
+                } else {
+                    msg('error', res.data.msg);
+                }
+            })
+        }
+        $('iframe.ql-video').attr('src', '');  // 清空视频iframe的src属性，可close视频
+        $('#carousel').modal('hide');
+    });
+    $('#saveBtn2').click(function () {
+        let entity = wrapper.$data.entity;
+        entity.pinfen = $('#modal-pinfen').val();
+        entity.pingyu = $('#modal-pingyu').val();
+        entity.id = $('#modal-id').val();
+        axios.put(
+            "/userTextInfo", entity
+        ).then(res => {
+            if (res.data.code === '0') {
+                msg('success', '操作成功');
+                wrapper.loadTable(1);
+            } else {
+                msg('error', res.data.msg);
+            }
+        })
+        $('iframe.ql-video').attr('src', '');  // 清空视频iframe的src属性，可close视频
+        $('#carousel2').modal('hide');
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<view class="container">
+	<view class="nx_line_title">
+	  <span>注册用户</span>
+	  
+	</view> 
+    <view class="item">
+        <navigator  wx:for="{{ZhuceyonghuList}}"    url="/pages/zhuceyonghudetail/index?id={{item.id}}" class="" hover-class="weui-cell_active">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image class="weui-media-box__thumb" src="{{item.url}}" style="height:200rpx;width:200rpx;" />
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__title2">{{item.xingming}}</view>
+          </view>
+        </navigator>
+    </view>
+</view>

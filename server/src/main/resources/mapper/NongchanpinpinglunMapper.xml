@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.NongchanpinpinglunInfoDao">
+
+    <select id="checkRepeat" resultType="java.lang.Integer">
+        select count(id) from `nongchanpinpinglun_info` where ${column} = #{value}
+        <if test="id != null">
+            and id != #{id}
+        </if>
+    </select>
+
+  <select id="findByShangpinbianhaozj" resultType="com.example.vo.NongchanpinpinglunInfoVo">
+        select * from `nongchanpinpinglun_info` where `shangpinbianhao` = #{username}
+    </select>
+
+    <select id="findByShangpinbianhao" resultType="com.example.vo.NongchanpinpinglunInfoVo">
+        select `nongchanpinpinglun_info`.* from `nongchanpinpinglun_info`
+        where 1 = 1
+        <if test="shangpinbianhao != null and shangpinbianhao != '' and shangpinbianhao != 'all'">
+           and 
+			(
+			`nongchanpinpinglun_info`.`shangpinbianhao` like concat('%', #{shangpinbianhao}, '%')
+			 or `nongchanpinpinglun_info`.`shangpinbianhao` like concat('%', #{shangpinbianhao}, '%')             or `nongchanpinpinglun_info`.`shangpinmingcheng` like concat('%', #{shangpinbianhao}, '%')             or `nongchanpinpinglun_info`.`pingfen` like concat('%', #{shangpinbianhao}, '%')             or `nongchanpinpinglun_info`.`pingjia` like concat('%', #{shangpinbianhao}, '%')             or `nongchanpinpinglun_info`.`zhanghao` like concat('%', #{shangpinbianhao}, '%')             or `nongchanpinpinglun_info`.`xingming` like concat('%', #{shangpinbianhao}, '%')             
+			)
+        </if>
+        order by `nongchanpinpinglun_info`.id
+    </select>
+	<select id="findByShangpinbianhaolist2" resultType="com.example.vo.NongchanpinpinglunInfoVo">
+        select `nongchanpinpinglun_info`.* from `nongchanpinpinglun_info`
+        where 1 = 1
+        <if test="shangpinbianhao != null and shangpinbianhao != '' and shangpinbianhao != 'all'">
+            and `nongchanpinpinglun_info`.`shangpinbianhao` like concat('%', #{shangpinbianhao}, '%')
+        </if>
+		<if test="zhanghao != null and zhanghao != '' and zhanghao != 'all'">
+            and `nongchanpinpinglun_info`.`zhanghao` like concat('%', #{zhanghao}, '%')
+        </if>
+        order by `nongchanpinpinglun_info`.id
+    </select>        <!--list23N-->
+    <select id="count" resultType="Integer">
+        select count(id) from `nongchanpinpinglun_info`
+    </select>
+</mapper>
+

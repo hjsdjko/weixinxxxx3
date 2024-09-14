@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml"
+      xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="content-type" content="no-cache, must-revalidate" />
+    <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT"/>
+    <title>个人信息</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/font-awesome.css">
+    <link rel="stylesheet" href="../css/element/index.css">
+    <link rel="stylesheet" href="../css/hsg.css">
+</head>
+<body>
+<div id="wrapper" v-cloak>
+    <div >
+        <div style="padding: 0 20px">
+            <div>
+                <div style="color: #666; font-weight: bold; border-bottom: 1px solid #ccc; padding: 10px 0; margin-bottom: 20px; font-size: 30px;">修改个人信息</div>
+            </div>
+
+            <div style="margin-top: 10px">
+                <div style="border: 1px solid #ff6b31;">
+                    <div style="padding: 5px; border-bottom: 1px solid #ff6b31; color: white; background-color: #ff6b31;">修改个人信息</div>
+                    <div style="border: 1px solid #ccc; padding: 10px">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form class="form-horizontal">
+                                    <input type="hidden" v-model="entity.id">
+									<div  class="form-group"><label class="col-sm-3 control-label">账号</label><div class="col-sm-7"><input type="text" class="form-control" v-model="entity.zhanghao" style="width: 160px" placeholder="请输入账号" id="zhanghao"></div></div>		<div  class="form-group"><label class="col-sm-3 control-label">密码</label><div class="col-sm-7"><input type="text" class="form-control" v-model="entity.mima" style="width: 160px" placeholder="请输入密码" id="mima"></div></div>		<div  class="form-group"><label class="col-sm-3 control-label">姓名</label><div class="col-sm-7"><input type="text" class="form-control" v-model="entity.xingming" style="width: 160px" placeholder="请输入姓名" id="xingming"></div></div>		<div  class="form-group"><label class="col-sm-3 control-label">性别</label><div class="col-sm-7"><select class="form-control" v-model="entity.xingbie"><option value="男">男</option><option value="女">女</option></select></div></div>		<div  class="form-group"><label class="col-sm-3 control-label">手机</label><div class="col-sm-7"><input type="text" class="form-control" v-model="entity.shouji" style="width: 160px" placeholder="请输入手机" id="shouji"></div></div>		<div  class="form-group"><label class="col-sm-3 control-label">身份证</label><div class="col-sm-7"><input type="text" class="form-control" v-model="entity.shenfenzheng" style="width: 160px" placeholder="请输入身份证" id="shenfenzheng"></div></div>		<div  class="form-group"><label class="col-sm-3 control-label">照片</label> <div class="col-sm-7"> <el-upload  class="avatar-uploader" action="/files/upload"  :show-file-list="false"  :on-success="zhaopiansccs"   :before-upload="zhaopianbaul"> <img v-if="zhaopianimrl" :src="zhaopianimrl" class="avatar"><img v-else-if="zhaopianavt" :src="'/files/download/'+zhaopianavt" class="avatar"> <i v-else class="el-icon-plus avatar-uploader-icon"></i></el-upload> </div></div>		<div  class="form-group"><label class="col-sm-3 control-label">备注</label><div class="col-sm-7"><textarea type="text" class="form-control" v-model="entity.beizhu" style="height: 100px" placeholder="请输入备注" id="beizhu"></textarea></div></div>		
+                                </form>
+                                <div style="text-align: center">
+                                    <button type="button" class="btn btn-primary" v-on:click="update()">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/nav.js"></script>
+<script src="../js/my.js"></script>
+<script src="../js/vue2.6.11/vue.min.js"></script>
+<script src="../js/vue2.6.11/axios.js"></script>
+<script src="../js/element/index.js"></script>
+
+<script>
+    function checkValid(entity) {
+        if (!entity.zhanghao || entity.zhanghao === "") {alert("账号不能为空"); return false;}if (!entity.mima || entity.mima === "") {alert("密码不能为空"); return false;}if (entity.shouji && entity.shouji !== ""){let reg = /^[1][3,4,5,7,8][0-9]{9}$/; if (!reg.test(entity.shouji)) {alert("请输入正确的手机");return false;}}if (entity.shenfenzheng && entity.shenfenzheng !== ""){let reg = /^\d{15}$|^\d{18}$|^\d{17}[xX]$/; if (!reg.test(entity.shenfenzheng)) {alert("请输入正确的身份证");return false;}}
+        return true;
+    }
+
+    new Vue({
+        el: '#wrapper',
+        data: {
+            authority: [],
+            permission: [],
+            storeUser: JSON.parse(localStorage.getItem("user")),
+            // gonghao: '',
+            //xingming:'',
+            user: {},
+
+			zhaopianimrl: '',//youtupianimrl			
+            objs: [],
+            pageInfo: {},
+            preActive: true,
+            nextActive: true,
+			zhaopianavt:null,//youtupianavt			
+			//youxia2sui
+			//youxxiabiaoxduan
+            entity: {
+
+            }
+        },
+        created: function () {
+            this.loadData();
+            axios.get("/authority").then(res => {
+                if (res.data.code === '0') {
+                    this.authority = res.data.data;
+                } else {
+                    msg('error', res.data.msg);
+                }
+            });
+
+            this.user = JSON.parse(localStorage.getItem('user'));
+			//youcreatexia2sui
+			//youffxiaxbiaoxduan
+
+        },
+
+        methods: {
+            loadData() {
+                axios.get("/getAccountInfo").then(res => {
+                    if (res.data.code === '0') {
+                        this.entity = res.data.data;
+                        if(this.entity.zhaopian) {this.zhaopianavt = JSON.parse(this.entity.zhaopian)[0];}                            //tupianloadtb
+                    } else {
+                        msg('error', res.data.msg);
+                    }
+                });
+
+            },
+
+            update() {
+                if (checkValid(this.entity)) {
+                    axios.put(
+                        "/zhuceyonghuInfo", this.entity
+                    ).then(res => {
+                        if (res.data.code === '0') {
+                            msg('success', '更新成功');
+                            this.loadData();
+                        } else {
+                            msg('error', res.data.msg);
+                        }
+                    })
+                }
+            },
+            zhaopiansccs(res, file) {
+                this.zhaopianimrl = URL.createObjectURL(file.raw);
+                this.entity.zhaopianflst.push(res.data.id);
+                this.zhaopianavt = res.data.id
+            },
+            zhaopianbaul(file) {
+                this.entity.zhaopianflst = [];
+                const isJPG = file.type === 'image/jpeg';
+                const isLt2M = file.size / 1024 / 1024 / 1024 < 2;
+
+                if (!isJPG) {
+                    this.$message.error('上传头像图片只能是 JPG 格式!');
+                }
+                if (!isLt2M) {
+                    this.$message.error('上传头像图片大小不能超过 2000MB!');
+                }
+                return isJPG && isLt2M;
+            },			//m_tupiansccsbaul
+            //logout() {
+            //    logout();
+            //}
+        }
+    })
+</script>
+</body>
+</html>

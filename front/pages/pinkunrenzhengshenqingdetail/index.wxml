@@ -1,0 +1,33 @@
+﻿<view class="nx_detail">
+  <view class="nx_detail_main">
+  	<view class="nx_detail_main_item">
+    <view class="nx_detail_main_item_left">申请标题</view>
+    <view class="nx_detail_main_item_right">{{obj.shenqingbiaoti}}</view>
+    </view>
+    <view class="nx_detail_main_item">
+    <view class="nx_detail_main_item_left">申请说明</view>
+    <view class="nx_detail_main_item_right">{{obj.shenqingshuoming}}</view>
+    </view>
+    <view class="nx_detail_main_item">
+    <view class="nx_detail_main_item_left">账号</view>
+    <view class="nx_detail_main_item_right">{{obj.zhanghao}}</view>
+    </view>
+    <view class="nx_detail_main_item">
+    <view class="nx_detail_main_item_left">姓名</view>
+    <view class="nx_detail_main_item_right">{{obj.xingming}}</view>
+    </view>
+    <view class="nx_detail_main_item">
+    <view class="nx_detail_main_item_left">是否审核</view>
+    <view class="nx_detail_main_item_right">{{obj.status}}</view>
+    </view>
+	<view class="nx_detail_main_item">
+    <view class="nx_detail_main_item_left">贫困证书</view>
+    </view>
+    <image  src="{{obj.pinkunzhengshu}}"></image>
+    
+  </view>
+  <!--jixaaxnnxiu-->
+  
+  
+  
+</view>

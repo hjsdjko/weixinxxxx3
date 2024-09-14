@@ -1,0 +1,9 @@
+<view class="nx_detail">
+  <view class="nx_detail_main">
+    <view class="nx_detail_main_item">
+      <view class="nx_detail_main_item_left">公告标题</view>
+      <view class="nx_detail_main_item_right">{{obj.gonggaobiaoti}}</view>
+    </view>
+  </view>
+  <rich-text nodes="{{obj.gonggaoneirong}}" ></rich-text>
+</view>

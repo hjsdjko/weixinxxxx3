@@ -1,0 +1,14 @@
+<view class="container">
+	<view class="nx_line_title">
+	  <span>菜品类别</span>
+	  
+	</view> 
+    <view class="nx_line_list">
+        <navigator class="nx_line_item" wx:for="{{ShangpinleibieList}}" wx:for-item="item" wx:key="id" url="/pages/shangpinleibiedetail/index?id={{item.id}}">
+            <view style="display:flex;flex:1">
+                <view class="nx_item_name" style="width:70%">类别：{{item.leibie}}</view>
+    
+            </view>
+        </navigator>
+    </view>
+</view>

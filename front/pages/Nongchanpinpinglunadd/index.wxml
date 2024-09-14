@@ -1,0 +1,28 @@
+﻿<view class="container">
+<view class="login-from">
+	<view class="inputView">
+    <label class="loginLab">商品编号</label>
+    <input class="inputText" type="text" placeholder="请输入商品编号" bindinput="shangpinbianhaoInput" value="{{obj.shangpinbianhao}}" disabled />
+  </view>		<view class="inputView">
+    <label class="loginLab">商品名称</label>
+    <input class="inputText" type="text" placeholder="请输入商品名称" bindinput="shangpinmingchengInput" value="{{obj.shangpinmingcheng}}" disabled />
+  </view>		<picker class="pick-bg" bindchange="bindPickerChangepingfen" range="{{pingfenarray}}">
+    <view class="picker">
+      评分：{{pingfen}}
+    </view>
+  </picker>		<view class="inputView">
+    <label class="loginLab">评价</label>
+    <input class="inputText" type="text" placeholder="请输入评价" bindinput="pingjiaInput" value=""  />
+  </view>		<view class="inputView">
+    <label class="loginLab">账号</label>
+    <input class="inputText" type="text" placeholder="请输入账号" bindinput="zhanghaoInput" value="{{zhanghao}}" disabled />
+  </view>		<view class="inputView">
+    <label class="loginLab">姓名</label>
+    <input class="inputText" type="text" placeholder="请输入姓名" bindinput="xingmingInput" value="{{xingming}}" disabled />
+  </view>		
+  <view class="line"></view>
+  <view class="loginBtnView">
+    <button class="loginBtn" type="primary" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="login">提交</button>
+  </view>
+</view>
+</view>

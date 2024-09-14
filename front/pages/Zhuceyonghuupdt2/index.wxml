@@ -1,0 +1,16 @@
+<view class="container">
+ <view class="login-from" >
+ 	<view class="inputView"><label class="loginLab">账号</label><input class="inputText" type="text" value="{{zhanghao}}" placeholder="请输入账号" bindinput="zhanghaoInput" /></view><view class="line"></view>
+   
+    <view class="inputView"><label class="loginLab">姓名</label><input class="inputText" type="text" value="{{xingming}}" placeholder="请输入姓名" bindinput="xingmingInput" /></view><view class="line"></view>
+    <picker class="pick-bg" bindchange="bindPickerChangexingbie" value="{{xingbie}}" range="{{xingbiearray}}"><view class="picker">性别：{{xingbie}}</view></picker><view class="line"></view>
+    <view class="inputView"><label class="loginLab">手机</label><input class="inputText" type="text" value="{{shouji}}" placeholder="请输入手机" bindinput="shoujiInput" /></view><view class="line"></view>
+    <view class="inputView"><label class="loginLab">身份证</label><input class="inputText" type="text" value="{{shenfenzheng}}" placeholder="请输入身份证" bindinput="shenfenzhengInput" /></view><view class="line"></view>
+    <view class="inputView"><label class="loginLab">照片</label><image class="user_icon" bindtap="uploadimg" src="{{avatarUrl}}"></image></view><view class="line"></view>
+    <view class="inputView"><label class="loginLab">备注</label><textarea class="hsgduohang" placeholder="输入您的备注" bindblur="beizhuInput" value="{{beizhu}}"></textarea></view><view class="line"></view>
+    
+    <view class="loginBtnView">
+      <button class="loginBtn" type="primary" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="logins">确定修改</button>
+    </view>
+  </view>
+</view>
